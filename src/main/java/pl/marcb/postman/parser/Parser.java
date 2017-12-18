@@ -37,7 +37,7 @@ public class Parser {
         do {
             String line = in.nextLine();
             if(!edgeSaved){
-                edge = Integer.parseInt(line)-1; //in the algorithm, the first element is added at the end
+                edge = Integer.parseInt(line); //in the algorithm, the first element is added at the end
                 edgeSaved = true;
             }else{
                 List<String> args = Arrays.asList(line.split(" "));

@@ -30,28 +30,32 @@ public class Cpp {
         boolean allEdges = false;
         int index = 0;
 
-        do {
-            CppAlgorithm cppAlgorithm = constructCppAlgorithm();
-            cppAlgorithm.evolve();
+        do{
+            do {
+                CppAlgorithm cppAlgorithm = constructCppAlgorithm();
+                cppAlgorithm.evolve();
 
-            List<String> genes = new LinkedList<String>(Arrays.asList(cppAlgorithm.getFittestChromosome().toString().split("\\|")));
-            genes.add(genes.get(0));
+                List<String> genes = new LinkedList<String>(Arrays.asList(cppAlgorithm.getFittestChromosome().toString().split("\\|")));
+                genes.add(genes.get(0));
 
-            allEdges = cppUtils.allPointsExist(genes);
-            if (allEdges) {
-                resultDTO.setFittestChromosome(cppAlgorithm.getFittestChromosome());
-                resultDTO.setFittestChromosomesFitness(cppAlgorithm.getFittestChromosomesFitness());
-                resultDTO.setFoundFittestChromoseme(true);
+                allEdges = cppUtils.allPointsExist(genes);
+                if (allEdges) {
+                    resultDTO.setFittestChromosome(cppAlgorithm.getFittestChromosome());
+                    resultDTO.setFittestChromosomesFitness(cppAlgorithm.getFittestChromosomesFitness());
+                    resultDTO.setFoundFittestChromoseme(true);
 
-                System.out.print("Znaleziono prawidłową śceżkę  "+ String.join("-", genes));
-                System.out.println(" o wartości " + cppAlgorithm.getFittestChromosomesFitness());
-            } else {
-                resultDTO.setFoundFittestChromoseme(false);
+                    System.out.print("Znaleziono prawidłową śceżkę  o liczbie krawędzi "+(genes.size()-1)+" - "+ String.join("-", genes));
+                    System.out.println(" o wartości " + cppAlgorithm.getFittestChromosomesFitness());
+                } else {
+                    resultDTO.setFoundFittestChromoseme(false);
 
-                System.out.println("Nie udało się znaleźć połączenia");
-            }
-            index++;
-        }while (!allEdges && index<maxNumExecutions);
+                    System.out.println("Nie udało się znaleźć połączenia");
+                }
+                index++;
+            }while (!allEdges && index<maxNumExecutions);
+            edge++;
+            index=0;
+        }while(!resultDTO.isFoundFittestChromoseme());
     }
 
     public ResultDTO getResultDTO() {

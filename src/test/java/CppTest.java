@@ -21,6 +21,8 @@ public class CppTest {
     public void test1() throws IOException, GAException {
         //given
         setProperty("max.execution", "10");
+        setProperty("config.maxGenerations", "200");
+        setProperty("config.populationDim", "1000");
 
         //when
         Cpp cpp = new Cpp();

@@ -46,6 +46,11 @@ public class CppUtils {
     }
 
     public boolean allPointsExist(List<String> genes){
+        for (int i = 1; i < genes.size(); i++) {
+            if(genes.get(i-1).equals(genes.get(i))){
+                return false;
+            }
+        }
         if(distinctPointsList.stream()
                 .filter(c -> !genes.contains(c)).count()==0){
 
