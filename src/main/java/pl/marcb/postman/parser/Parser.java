@@ -73,7 +73,7 @@ public class Parser {
     }
 
     public int getEdge() {
-        return edge;
+        return edge*2;
     }
 
     public List<GraphElement> getGraphElements() {

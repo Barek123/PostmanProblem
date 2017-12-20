@@ -20,10 +20,11 @@ public class CppTest {
     @Test
     public void test1() throws IOException, GAException {
         //given
-        setProperty("max.execution", "10");
-        setProperty("config.maxGenerations", "200");
-        setProperty("config.populationDim", "1000");
-
+        setProperty("max.execution", "1000");
+        setProperty("config.maxGenerations", "50");
+        setProperty("config.populationDim", "50");
+        setProperty("config.crossoverProb","0.8");
+        setProperty("config.mutationProb","0.03");
         //when
         Cpp cpp = new Cpp();
         ResultDTO resultDTO = cpp.getResultDTO();

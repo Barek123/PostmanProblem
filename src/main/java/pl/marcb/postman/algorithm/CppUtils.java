@@ -56,9 +56,19 @@ public class CppUtils {
 
             String genesToTest = String.join("", genes);
 
-            for (GraphElement graphElement : graphElements){
+            for (GraphElement graphElement : graphElements){    //sprawdzanie czy zawiera kazdą z krawędzi
                 if(!(genesToTest.contains(graphElement.getPointA()+graphElement.getPointB())
                     ||genesToTest.contains(graphElement.getPointB()+graphElement.getPointA()))){
+                    return false;
+                }
+            }
+            for (int i = 1; i < genesToTest.length(); i++) {    //sprawdzenie czy każde z połączeń jest w pliku
+                int pointAIndex = i-1;  //variable in stream must be effectively final
+                int pointBIndex = i;
+                if(graphElements.stream()
+                        .filter(c -> (c.getPointA().equals(genesToTest.charAt(pointAIndex)+"") && c.getPointB().equals(genesToTest.charAt(pointBIndex)+""))
+                                || (c.getPointA().equals(genesToTest.charAt(pointBIndex)+"") && c.getPointB().equals(genesToTest.charAt(pointAIndex)+"")))
+                        .collect(Collectors.toList()).size() == 0){
                     return false;
                 }
             }
@@ -77,7 +87,7 @@ public class CppUtils {
             GraphElement graphElement = graphsList.get(0);
             return (graphElement.getPointA().equals(pointA))? graphElement.getDistanceFromAtoB(): graphElement.getDistanceFromBtoA();
         }else{
-            return 0.0;
+            return 100.0;
         }
     }
 
