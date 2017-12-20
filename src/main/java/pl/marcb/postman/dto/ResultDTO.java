@@ -4,9 +4,9 @@ import com.softtechdesign.ga.Chromosome;
 
 public class ResultDTO {
     Chromosome fittestChromosome;
-    double fittestChromosomesFitness;
+    double fittestChromosomesFitness = 0.0;
 
-    boolean foundFittestChromoseme;
+    boolean foundFittestChromoseme = false;
 
     public ResultDTO() {
     }

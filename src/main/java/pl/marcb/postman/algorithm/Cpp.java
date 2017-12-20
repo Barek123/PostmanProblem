@@ -40,22 +40,24 @@ public class Cpp {
 
                 allEdges = cppUtils.allPointsExist(genes);
                 if (allEdges) {
-                    resultDTO.setFittestChromosome(cppAlgorithm.getFittestChromosome());
-                    resultDTO.setFittestChromosomesFitness(cppAlgorithm.getFittestChromosomesFitness());
-                    resultDTO.setFoundFittestChromoseme(true);
-
-                    System.out.print("Znaleziono prawidłową śceżkę  o liczbie krawędzi "+(genes.size()-1)+" - "+ String.join("-", genes));
-                    System.out.println(" o wartości " + cppAlgorithm.getFittestChromosomesFitness());
-                } else {
-                    resultDTO.setFoundFittestChromoseme(false);
-
-                    System.out.println("Nie udało się znaleźć połączenia");
+                    if(!resultDTO.isFoundFittestChromoseme() ||
+                            resultDTO.getFittestChromosomesFitness()>cppAlgorithm.getFittestChromosomesFitness()){
+                        resultDTO.setFittestChromosome(cppAlgorithm.getFittestChromosome());
+                        resultDTO.setFittestChromosomesFitness(cppAlgorithm.getFittestChromosomesFitness());
+                        resultDTO.setFoundFittestChromoseme(true);
+                    }
+                    System.out.println("znaleziono element");
                 }
                 index++;
-            }while (!allEdges && index<maxNumExecutions);
+            }while (index<maxNumExecutions);
             edge++;
             index=0;
         }while(!resultDTO.isFoundFittestChromoseme());
+
+        if(resultDTO.isFoundFittestChromoseme()){
+            System.out.print("Znaleziono prawidłową śceżkę  o liczbie krawędzi "+((resultDTO.getFittestChromosome().toString().length()+1)/2)+" - "+ resultDTO.getFittestChromosome().toString());
+            System.out.println(" o wartości " + resultDTO.getFittestChromosomesFitness());
+        }
     }
 
     public ResultDTO getResultDTO() {

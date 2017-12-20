@@ -20,7 +20,7 @@ public class CppTest {
     @Test
     public void test1() throws IOException, GAException {
         //given
-        setProperty("max.execution", "1000");
+        setProperty("max.execution", "500");
         setProperty("config.maxGenerations", "50");
         setProperty("config.populationDim", "50");
         setProperty("config.crossoverProb","0.8");
